@@ -82,6 +82,14 @@
             margin-bottom: 20px;
         }
 
+        .hero-content .about-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
         button {
             padding: 10px 20px;
             font-size: 18px;
@@ -114,20 +122,9 @@
             margin: 10% auto;
             padding: 30px;
             border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
+            width: 80строка: 80%;
+            max-width: 400px;
             border-radius: 8px;
-            text-align: center;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 20px;
-        }
-
-        .modal-content p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
         }
 
         .close {
@@ -141,6 +138,53 @@
         .close:hover,
         .close:focus {
             color: black;
+        }
+
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+        }
+
+        .tabcontent.active {
+            display: block;
+        }
+
+        .modal-content form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content form button {
+            width: 100%;
+            margin-top: 10px;
         }
 
         /* Footer */
@@ -192,7 +236,10 @@
             <img src="photo.jpg" alt="Антон Коцур" class="profile-img">
             <h1>Привіт, я Антон!</h1>
             <p>Учень, спортсмен, чайний майстер, дизайнер-початківець та модний ентузіаст.</p>
-            <button id="openModal">Про мене</button>
+            <div class="about-text">
+                <p>Коцур Антон Сергійович — учень, який поєднує в собі силу, витривалість та творчість. Любительськи займається змішаними єдиноборствами (ММА) і захоплюється гірським велоспортом, де кожна перемога — це результат неймовірної праці та наполегливості.<br><br>Окрім спорту, Антон є майстром чайної церемонії, вивчаючи мистецтво гармонії та спокою. Його любов до стилю проявляється у перших кроках у світі дизайну одягу. Модний ентузіаст за покликанням, Антон шукає натхнення в кожній деталі й прагне передати своє бачення світу через моду.</p>
+            </div>
+            <button id="openModal">Вхід/Реєстрація</button>
         </div>
     </section>
 
@@ -200,8 +247,29 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Про мене</h2>
-            <p>Коцур Антон Сергійович — учень, який поєднує в собі силу, витривалість та творчість. Любительськи займається змішаними єдиноборствами (ММА) і захоплюється гірським велоспортом, де кожна перемога — це результат неймовірної праці та наполегливості.<br><br>Окрім спорту, Антон є майстром чайної церемонії, вивчаючи мистецтво гармонії та спокою. Його любов до стилю проявляється у перших кроках у світі дизайну одягу. Модний ентузіаст за покликанням, Антон шукає натхнення в кожній деталі й прагне передати своє бачення світу через моду.</p>
+            <div class="tab">
+                <button class="tablinks active" onclick="openTab(event, 'Login')">Вхід</button>
+                <button class="tablinks" onclick="openTab(event, 'Register')">Реєстрація</button>
+            </div>
+
+            <div id="Login" class="tabcontent active">
+                <h2>Вхід</h2>
+                <form id="loginForm">
+                    <input type="email" placeholder="Електронна пошта" required>
+                    <input type="password" placeholder="Пароль" required>
+                    <button type="submit">Увійти</button>
+                </form>
+            </div>
+
+            <div id="Register" class="tabcontent">
+                <h2>Реєстрація</h2>
+                <form id="registrationForm">
+                    <input type="text" placeholder="Ім'я" required>
+                    <input type="email" placeholder="Електронна пошта" required>
+                    <input type="password" placeholder="Пароль" required>
+                    <button type="submit">Зареєструватися</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -218,6 +286,8 @@
         const modal = document.getElementById('modal');
         const openModal = document.getElementById('openModal');
         const closeModal = document.querySelector('.close');
+        const loginForm = document.getElementById('loginForm');
+        const registrationForm = document.getElementById('registrationForm');
 
         openModal.onclick = function() {
             modal.style.display = 'block';
@@ -234,8 +304,49 @@
                 modal.style.display = 'none';
             }
         };
+
+        // Обробка вкладок
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName('tabcontent');
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove('active');
+            }
+            const tablinks = document.getElementsByClassName('tablinks');
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove('active');
+            }
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // Обробка форми входу
+        loginForm.onsubmit = function(event) {
+            event.preventDefault();
+            const email = loginForm.querySelector('input[type="email"]').value;
+            const password = loginForm.querySelector('input[type="password"]').value;
+            if (email && password) {
+                alert('Вхід успішний!');
+                modal.style.display = 'none';
+                loginForm.reset();
+            } else {
+                alert('Будь ласка, заповніть усі поля.');
+            }
+        };
+
+        // Обробка форми реєстрації
+        registrationForm.onsubmit = function(event) {
+            event.preventDefault();
+            const name = registrationForm.querySelector('input[type="text"]').value;
+            const email = registrationForm.querySelector('input[type="email"]').value;
+            const password = registrationForm.querySelector('input[type="password"]').value;
+            if (name && email && password.length >= 6) {
+                alert('Реєстрація успішна!');
+                modal.style.display = 'none';
+                registrationForm.reset();
+            } else {
+                alert('Будь ласка, заповніть усі поля коректно. Пароль має містити щонайменше 6 символів.');
+            }
+        };
     </script>
-</body>
-</html>t>
 </body>
 </html>

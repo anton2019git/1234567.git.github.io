@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коцур Антон Сергійович - Візитка</title>
+    <style>
+        /* Загальні налаштування */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #111;
+        }
+
+        /* Навігація */
+        header {
+            background: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            color: #555;
+        }
+
+        /* Герой секція */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #111;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+
+        .modal-content form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content form button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        .social-links a {
+            color: #333;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #555;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Коцур Антон</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Про мене</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="photo.jpg" alt="Антон Коцур" class="profile-img">
+            <h1>Привіт, я Антон!</h1>
+            <p>Учень, спортсмен, чайний майстер, дизайнер-початківець та модний ентузіаст.</p>
+            <button id="openModal">Реєстрація</button>
+        </div>
+    </section>
+
+    <!-- Модальне вікно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Реєстрація</h2>
+            <form id="registrationForm">
+                <input type="text" placeholder="Ім'я" required>
+                <input type="email" placeholder="Електронна пошта" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Зареєструватися</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Зв'язок: oldi.anton.kotsur@gmail.com | Телефон: 0995542524</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/duckerism/" target="_blank">Instagram</a> | 
+            <a href="https://t.me/duckerism" target="_blank">Telegram</a>
+        </div>
+    </footer>
+
+    <script>
+        // Відкриття модального вікна
+        const modal = document.getElementById('modal');
+        const openModal = document.getElementById('openModal');
+        const closeModal = document.querySelector('.close');
+        const registrationForm = document.getElementById('registrationForm');
+
+        openModal.onclick = function() {
+            modal.style.display = 'block';
+        };
+
+        // Закриття модального вікна по кнопці "х"
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Закриття модального вікна при кліку за межами вікна
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Обробка відправки форми
+        registrationForm.onsubmit = function(event) {
+            event.preventDefault(); // Запобігаємо стандартній відправці форми
+
+            const name = registrationForm.querySelector('input[type="text"]').value;
+            const email = registrationForm.querySelector('input[type="email"]').value;
+            const password = registrationForm.querySelector('input[type="password"]').value;
+
+            // Простий приклад валідації
+            if (name && email && password.length >= 6) {
+                alert('Реєстрація успішна!');
+                modal.style.display = 'none';
+                registrationForm.reset(); // Очищення форми
+            } else {
+                alert('Будь ласка, заповніть усі поля коректно. Пароль має містити щонайменше 6 символів.');
+            }
+        };
+    </script>
+</body>
+</html>

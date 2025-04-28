@@ -115,8 +115,19 @@
             padding: 30px;
             border: 1px solid #888;
             width: 80%;
-            max-width: 400px;
+            max-width: 500px;
             border-radius: 8px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
         }
 
         .close {
@@ -130,20 +141,6 @@
         .close:hover,
         .close:focus {
             color: black;
-        }
-
-        .modal-content form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            display: block;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .modal-content form button {
-            width: 100%;
-            margin-top: 10px;
         }
 
         /* Footer */
@@ -195,21 +192,16 @@
             <img src="photo.jpg" alt="Антон Коцур" class="profile-img">
             <h1>Привіт, я Антон!</h1>
             <p>Учень, спортсмен, чайний майстер, дизайнер-початківець та модний ентузіаст.</p>
-            <button id="openModal">Реєстрація</button>
+            <button id="openModal">Про мене</button>
         </div>
     </section>
 
     <!-- Модальне вікно -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Реєстрація</h2>
-            <form id="registrationForm">
-                <input type="text" placeholder="Ім'я" required>
-                <input type="email" placeholder="Електронна пошта" required>
-                <input type="password" placeholder="Пароль" required>
-                <button type="submit">Зареєструватися</button>
-            </form>
+            <span class="close">×</span>
+            <h2>Про мене</h2>
+            <p>Коцур Антон Сергійович — учень, який поєднує в собі силу, витривалість та творчість. Любительськи займається змішаними єдиноборствами (ММА) і захоплюється гірським велоспортом, де кожна перемога — це результат неймовірної праці та наполегливості.<br><br>Окрім спорту, Антон є майстром чайної церемонії, вивчаючи мистецтво гармонії та спокою. Його любов до стилю проявляється у перших кроках у світі дизайну одягу. Модний ентузіаст за покликанням, Антон шукає натхнення в кожній деталі й прагне передати своє бачення світу через моду.</p>
         </div>
     </div>
 
@@ -226,7 +218,6 @@
         const modal = document.getElementById('modal');
         const openModal = document.getElementById('openModal');
         const closeModal = document.querySelector('.close');
-        const registrationForm = document.getElementById('registrationForm');
 
         openModal.onclick = function() {
             modal.style.display = 'block';
@@ -243,24 +234,8 @@
                 modal.style.display = 'none';
             }
         };
-
-        // Обробка відправки форми
-        registrationForm.onsubmit = function(event) {
-            event.preventDefault(); // Запобігаємо стандартній відправці форми
-
-            const name = registrationForm.querySelector('input[type="text"]').value;
-            const email = registrationForm.querySelector('input[type="email"]').value;
-            const password = registrationForm.querySelector('input[type="password"]').value;
-
-            // Простий приклад валідації
-            if (name && email && password.length >= 6) {
-                alert('Реєстрація успішна!');
-                modal.style.display = 'none';
-                registrationForm.reset(); // Очищення форми
-            } else {
-                alert('Будь ласка, заповніть усі поля коректно. Пароль має містити щонайменше 6 символів.');
-            }
-        };
     </script>
+</body>
+</html>t>
 </body>
 </html>
